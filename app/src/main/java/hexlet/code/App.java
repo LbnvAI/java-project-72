@@ -14,6 +14,9 @@ public class App {
         app.get("/", ctx -> {
             ctx.result("Hello, World!");
         });
+        app.get("/testPage", ctx -> {
+            ctx.result("Hello, Guest at my TEST PAGE!");
+        });
         return app;
     }
 
