@@ -28,6 +28,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     implementation("com.zaxxer:HikariCP:6.2.1")
     implementation("com.h2database:h2:2.3.232")
+    implementation("org.postgresql:postgresql:42.7.4")
 }
 
 tasks.test {
