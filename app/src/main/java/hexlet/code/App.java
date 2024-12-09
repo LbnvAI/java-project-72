@@ -23,6 +23,7 @@ public class App {
         String port = System.getenv().getOrDefault("Port", "7070");
         return Integer.parseInt(port);
     }
+
     private static String getBaseUrl() {
         return System.getenv().getOrDefault("JDBC_DATABASE_URL", "jdbc:h2:mem:project");
     }
@@ -35,7 +36,7 @@ public class App {
 
     public static Javalin getApp() throws IOException, SQLException {
         var hikariConfig = new HikariConfig();
-        hikariConfig.setJdbcUrl(getBaseUrl()+";DB_CLOSE_DELAY=-1;");
+        hikariConfig.setJdbcUrl(getBaseUrl() + ";DB_CLOSE_DELAY=-1;");
 
         var dataSource = new HikariDataSource(hikariConfig);
         var url = App.class.getClassLoader().getResourceAsStream("schema.sql");
@@ -47,7 +48,7 @@ public class App {
              var statement = connection.createStatement()) {
             statement.execute(sql);
         }
-        BaseRepository.dataSource = dataSource;
+        BaseRepository.setDataSource(dataSource);
 
         var app = Javalin.create(config -> {
             config.bundledPlugins.enableDevLogging();
